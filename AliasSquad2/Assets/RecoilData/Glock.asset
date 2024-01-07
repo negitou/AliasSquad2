@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b58540635d67244bb440e2259fcc233, type: 3}
+  m_Name: Glock
+  m_EditorClassIdentifier: 
+  x:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 4
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  y:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 1.975259
+      outSlope: 1.975259
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 2
+      value: 5
+      inSlope: 1.25
+      outSlope: 1.25
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 4
+      value: 6
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  damage: 13
+  magazine: 20
+  ammo: 100
+  delayTime: 0.2
+  soundEffect: {fileID: 8300000, guid: 777719214bb269b42b563942052a5f0c, type: 3}
