@@ -271,7 +271,4 @@ public class PlayerController : NetworkBehaviour
 		}
 
 	}
-
-
-
 }

@@ -50,10 +50,16 @@ public class PlayerStatus : NetworkBehaviour
         }
     }
 
-    void Start ()
+    public override void OnNetworkSpawn()
 	{
-        if (IsLocalPlayer)
+        if (IsServer)
         {
+            currentHealth.Value = maxHealth;
+        }
+
+        if (IsOwner)
+        {
+            currentHealth.OnValueChanged += OnChangeHealth;
             Transform healthObj = GameObject.Find("HUD_Alias").transform.Find("HP");
             healthNum = healthObj.Find("HpDisplay").gameObject.GetComponent<Text>();
             //healthBar = healthObj.Find("HPBar").gameObject.GetComponent<Image>();
@@ -80,8 +86,15 @@ public class PlayerStatus : NetworkBehaviour
             }
         }
 			
-		if(IsLocalPlayer && death.Value){
-            IkikaeruServerRpc();
+		if(IsOwner && death.Value){
+            if (IsServer)
+            {
+                Restart();
+            }
+            else
+            {
+                IkikaeruServerRpc();
+            }
             transform.position = GameObject.Find("SpawnPoints").transform.GetChild(Random.Range(0, 6)).transform.position;
 
             GetComponent<PlayerAttack>().AmmoRefill();
@@ -109,7 +122,7 @@ public class PlayerStatus : NetworkBehaviour
         }
 
 		currentHealth.Value -= amount;
-
+        Debug.Log(currentHealth.Value.ToString()+"/amount:"+ amount.ToString());
 		if (currentHealth.Value < 0) {
             currentHealth.Value = 0;
 		}
@@ -127,10 +140,10 @@ public class PlayerStatus : NetworkBehaviour
         }
 	}		
 
-	private void OnChangeHealth (int health)
+	private void OnChangeHealth (int previous, int current)
 	{
 		//数値
-		healthNum.text = health.ToString ();
+		healthNum.text = current.ToString ();
 		//ヘルスバー
 		//healthBar.fillAmount = ((float)health/(float)maxHealth); 
 	}

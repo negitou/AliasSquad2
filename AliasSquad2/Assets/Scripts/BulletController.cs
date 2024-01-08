@@ -7,7 +7,7 @@ public class BulletController : NetworkBehaviour {
     private NetworkVariable<float> defaultDamage = new NetworkVariable<float>();
     private float currentDamage;
 
-    public NetworkVariable<GameObject> firePlayer = new NetworkVariable<GameObject>();
+    public GameObject firePlayer;
 
     private GameObject hitObj;
     [SerializeField] private GameObject bloodParticle;
@@ -22,13 +22,13 @@ public class BulletController : NetworkBehaviour {
     Quaternion rotation;
 
 
-    void Start () {
-        currentDamage = defaultDamage.Value;
+    public override void OnNetworkSpawn() {
         if (IsServer)
         {
-            firePlayer.Value = hitObj;
+            currentDamage = defaultDamage.Value;
+            firePlayer = hitObj;
         }
-        Invoke("ObjectDestroy",3f);
+        //Invoke("ObjectDestroy",3f);
 	}
 
     private void Update()
@@ -40,7 +40,7 @@ public class BulletController : NetworkBehaviour {
         time += Time.deltaTime;
         if (time > 2)
         {
-            //NetworkServer.Destroy(gameObject);
+            this.GetComponent<NetworkObject>().Despawn();
         }
     }
 
@@ -64,7 +64,7 @@ public class BulletController : NetworkBehaviour {
             PlayerPart playerPart = col.GetComponent<PlayerPart>();
             if (hitObj != playerPart.GetPlayerObj)
             {
-                LayerMask layerMask = LayerMask.GetMask(new string[] { "Dmg Collision" });
+                LayerMask layerMask = LayerMask.GetMask(new string[] { "Damage Collision" });
                 if (Physics.Raycast(transform.position - transform.forward * 2, transform.forward, out hit, 200f))
                 {
                     rotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);
@@ -136,23 +136,17 @@ public class BulletController : NetworkBehaviour {
 
     public void SetDefaultDamage(int amount)
     {
-        if (!IsServer)
+        defaultDamage.Value = amount;
+        currentDamage = defaultDamage.Value;
+        Debug.Log("SetDefaultDamage:" + defaultDamage.Value.ToString());
+        RaycastHit hit;
+
+        LayerMask layerMask = LayerMask.GetMask(new string[] { "Object" });
+        if (Physics.Raycast(transform.position - transform.forward * 2, transform.forward, out hit, 200f, layerMask))
         {
-            return;
+            rotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);
+            position = hit.point;
         }
 
-        if (defaultDamage.Value == 0)
-        {
-            defaultDamage.Value = amount;
-
-            RaycastHit hit;
-
-            LayerMask layerMask = LayerMask.GetMask(new string[] { "Object" });
-            if (Physics.Raycast(transform.position - transform.forward * 2, transform.forward, out hit, 200f, layerMask))
-            {
-                rotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);
-                position = hit.point;
-            }
-        }
     }
 }

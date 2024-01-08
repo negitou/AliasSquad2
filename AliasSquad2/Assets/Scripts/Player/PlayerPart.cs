@@ -18,7 +18,7 @@ public class PlayerPart : NetworkBehaviour {
 
     public void PlayerHit(float damage)
     {
-        Debug.Log(damageMultiplier);
+        Debug.Log(damageMultiplier.ToString() + ":" + damage.ToString());
         playerObj.GetComponent<PlayerStatus>().TakeDamage(Mathf.FloorToInt(damage * damageMultiplier));
     }
 

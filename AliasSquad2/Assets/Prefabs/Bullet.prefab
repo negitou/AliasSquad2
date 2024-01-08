@@ -4930,7 +4930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 2367378684
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -4980,8 +4980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 692ee83fd73bb2345a2a195535797563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePlayer:
-    m_InternalValue: {fileID: 0}
+  firePlayer: {fileID: 0}
   bloodParticle: {fileID: 1847678020727246, guid: 5ed675d3f6a8e424ba72ed8075a252cc,
     type: 3}
   woodParticle: {fileID: 1000011190285628, guid: beb3acff7ab73944fb8f470f24d74ed3,

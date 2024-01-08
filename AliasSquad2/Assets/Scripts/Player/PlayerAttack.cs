@@ -26,7 +26,7 @@ public class PlayerAttack : NetworkBehaviour {
     [SerializeField] private GameObject flash;
     [SerializeField] private GameObject molotov;
     [SerializeField] private GameObject c4;
-    [SerializeField] private GameObject bulletObj;
+    public GameObject bulletObj;
 
     [SerializeField] private Transform throwPos;
     [SerializeField] private Transform throwDownPos;
@@ -89,8 +89,6 @@ public class PlayerAttack : NetworkBehaviour {
 
 	private Vector3 fpsPlayerObjPos;
 
-    private Quaternion quaternion;
-
     private float count;
 
     private int reloading = -1;
@@ -100,12 +98,13 @@ public class PlayerAttack : NetworkBehaviour {
 
     [SerializeField] private Text reloadHintText;
 
-    void Start()
+    public override void OnNetworkSpawn()
     {
         fpsObjFlag.Value = false;
         rigidbody = GetComponent<Rigidbody>();
         beforeSelectSlot.Value = 2;
         currentSelectSlot.Value = 0;
+        camera = transform.Find("RecoilObj").Find("PlayerCamera");
         if (IsLocalPlayer)
         {
 
@@ -116,7 +115,6 @@ public class PlayerAttack : NetworkBehaviour {
             slot[4] = "0";
             slot[5] = "0";
             slot[6] = "0";
-            camera = transform.Find("RecoilObj").Find("PlayerCamera");
             for (int i = 0; i < preset.Length; i++)
             {
                 //presetStr[i] = AccountManager.accountManager.GetPreset(i);
@@ -133,7 +131,7 @@ public class PlayerAttack : NetworkBehaviour {
     }
 
     void Update() {
-        if (IsLocalPlayer) {
+        if (IsOwner) {
 
             switch (currentSelectSlot.Value)
             {
@@ -759,18 +757,16 @@ public class PlayerAttack : NetworkBehaviour {
         
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void FireServerRpc(int damage)
     {
-		var bullet = (GameObject)Instantiate(bulletObj, transform.Find("RecoilObj").Find("PlayerCamera").position, transform.Find("RecoilObj").Find("PlayerCamera").rotation);
+		var bullet = Instantiate(bulletObj, camera.position, camera.rotation);
 
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 100;
+        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * 100, ForceMode.VelocityChange);
         bullet.GetComponent<BulletController>().SetDefaultDamage(damage);
         bullet.GetComponent<BulletController>().SetHitObj = gameObject;
 
-        //NetworkServer.Spawn(bullet);
-
-
+        bullet.GetComponent<NetworkObject>().Spawn();
     }
 
 
