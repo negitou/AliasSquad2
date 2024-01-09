@@ -515,7 +515,7 @@ public class PlayerAttack : NetworkBehaviour {
     [ServerRpc]
     private void SetCurrentSelectSlotServerRpc(int num)
     {
-		beforeSelectSlot = currentSelectSlot;
+		beforeSelectSlot.Value = currentSelectSlot.Value;
         currentSelectSlot.Value = num; 
         fpsObjFlag.Value = true;
     }
