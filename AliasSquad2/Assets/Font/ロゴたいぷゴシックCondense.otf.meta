@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 8f3b3c7748f332d4eae378a568534620
+timeCreated: 1538010270
+licenseType: Pro
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: 07LogoTypeGothic-Condense
+  fontNames:
+  - 07LogoTypeGothic-Condense
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

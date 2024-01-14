@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b58540635d67244bb440e2259fcc233, type: 3}
+  m_Name: M4A4
+  m_EditorClassIdentifier: 
+  x:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0.4527097
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.6728851
+      value: -5.071471
+      inSlope: -6.4285717
+      outSlope: -6.4285717
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.150354
+      value: 5.271694
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.8697326
+      value: -4.500407
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 3.0038774
+      value: 5.43937
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  y:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0.45856112
+      outSlope: 0.45856112
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.628009
+      value: 7.4455194
+      inSlope: 16.529089
+      outSlope: 16.529089
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.1062644
+      value: 12.95915
+      inSlope: 6.8238945
+      outSlope: 6.8238945
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.7906095
+      value: 15.935926
+      inSlope: 1.6970145
+      outSlope: 1.6970145
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 2.9906094
+      value: 17.12757
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  damage: 23
+  magazine: 30
+  ammo: 90
+  delayTime: 0.09
+  soundEffect: {fileID: 8300000, guid: 6830449080188ac4fa84eef4804fef99, type: 3}
