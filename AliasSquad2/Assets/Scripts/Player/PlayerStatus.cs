@@ -132,11 +132,11 @@ public class PlayerStatus : NetworkBehaviour
             death.Value = true;
             if (gameObject.GetComponent<PlayerManager> ().team == "AT") {
 				GameObject tmp = Instantiate (atRag,transform.position,transform.rotation);
-				//NetworkServer.Spawn (tmp);
+				tmp.GetComponent<NetworkObject>().Spawn();
 			} else {
 				GameObject tmp = Instantiate (ftRag, transform.position, transform.rotation);
-				//NetworkServer.Spawn (tmp);
-			}
+                tmp.GetComponent<NetworkObject>().Spawn();
+            }
         }
 	}		
 
