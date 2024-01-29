@@ -7,7 +7,7 @@ public class BulletController : NetworkBehaviour {
     private NetworkVariable<float> defaultDamage = new NetworkVariable<float>();
     private float currentDamage;
 
-    public GameObject firePlayer;
+    public NetworkVariable<ulong> ownerClientId = new NetworkVariable<ulong>();
 
     private GameObject hitObj;
     [SerializeField] private GameObject bloodParticle;
@@ -26,7 +26,6 @@ public class BulletController : NetworkBehaviour {
         if (IsServer)
         {
             currentDamage = defaultDamage.Value;
-            firePlayer = hitObj;
         }
         //Invoke("ObjectDestroy",3f);
 	}
@@ -74,7 +73,7 @@ public class BulletController : NetworkBehaviour {
                 var particle = (GameObject)Instantiate(bloodParticle, position, rotation);
 
                 hitObj = playerPart.GetPlayerObj;
-                playerPart.PlayerHit(currentDamage);
+                playerPart.PlayerHit(ownerClientId.Value, currentDamage);
                 currentDamage = (int)(currentDamage * 0.6f);
             }
         }
@@ -138,7 +137,7 @@ public class BulletController : NetworkBehaviour {
     {
         defaultDamage.Value = amount;
         currentDamage = defaultDamage.Value;
-        Debug.Log("SetDefaultDamage:" + defaultDamage.Value.ToString());
+        //Debug.Log("SetDefaultDamage:" + defaultDamage.Value.ToString());
         RaycastHit hit;
 
         LayerMask layerMask = LayerMask.GetMask(new string[] { "Object" });

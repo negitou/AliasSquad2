@@ -518,3 +518,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hostButton: {fileID: 1317206455639370424}
   _clientButton: {fileID: 1213544664026336816}
+  InGameManager: {fileID: 4339027115552366481, guid: b22cd2cdb8dbe71479e03df55cc9de7f,
+    type: 3}

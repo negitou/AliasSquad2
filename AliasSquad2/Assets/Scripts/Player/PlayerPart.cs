@@ -16,10 +16,10 @@ public class PlayerPart : NetworkBehaviour {
         playerObj = GameObject.Find("Player");
     }
 
-    public void PlayerHit(float damage)
+    public void PlayerHit(ulong clientId,float damage)
     {
         Debug.Log(damageMultiplier.ToString() + ":" + damage.ToString());
-        playerObj.GetComponent<PlayerStatus>().TakeDamage(Mathf.FloorToInt(damage * damageMultiplier));
+        playerObj.GetComponent<PlayerStatus>().TakeDamage(clientId, Mathf.FloorToInt(damage * damageMultiplier));
     }
 
 }

@@ -68,6 +68,7 @@ public class NewPlayerAttack : NetworkBehaviour
         bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * 100, ForceMode.VelocityChange);
         bullet.GetComponent<BulletController>().SetDefaultDamage(damage);
         bullet.GetComponent<BulletController>().SetHitObj = gameObject;
+        bullet.GetComponent<BulletController>().ownerClientId.Value = OwnerClientId;
 
         bullet.GetComponent<NetworkObject>().Spawn();
     }

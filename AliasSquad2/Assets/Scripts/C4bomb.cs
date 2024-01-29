@@ -127,7 +127,7 @@ public class C4bomb : NetworkBehaviour {
                         {
                             PlayerStatus obj = ply.GetComponent<PlayerStatus>();
 
-                            obj.TakeDamage(c4Damage);
+                            //obj.TakeDamage(c4Damage);
 
                         }
 

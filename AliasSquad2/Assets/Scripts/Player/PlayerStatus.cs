@@ -35,6 +35,8 @@ public class PlayerStatus : NetworkBehaviour
 	[SerializeField] private GameObject atRag;
 	[SerializeField] private GameObject ftRag;
 
+    InGameManager gameManager;
+
     private void Reset()
     {
         flashPanel = transform.Find("CanvasFP").Find("FlashPanel").GetComponent<Image>();
@@ -66,7 +68,7 @@ public class PlayerStatus : NetworkBehaviour
         }
 	}
 
-	void Update ()
+    void Update ()
 	{
         if (flashPanel.color.a > 0)
         {
@@ -114,7 +116,7 @@ public class PlayerStatus : NetworkBehaviour
 	}
 	*/
 
-	public void TakeDamage (int amount)
+	public void TakeDamage (ulong clientId, int amount)
 	{
         if (!IsServer)
         {
@@ -122,7 +124,7 @@ public class PlayerStatus : NetworkBehaviour
         }
 
 		currentHealth.Value -= amount;
-        Debug.Log(currentHealth.Value.ToString()+"/amount:"+ amount.ToString());
+        //Debug.Log(currentHealth.Value.ToString()+"/amount:"+ amount.ToString());
 		if (currentHealth.Value < 0) {
             currentHealth.Value = 0;
 		}
@@ -130,6 +132,9 @@ public class PlayerStatus : NetworkBehaviour
         {
             deathCount.Value++;
             death.Value = true;
+            if(!gameManager) gameManager = FindObjectOfType<InGameManager>();
+            gameManager.AddKillServerRpc(clientId);
+            gameManager.AddDeathServerRpc(OwnerClientId)    ;
             if (gameObject.GetComponent<PlayerManager> ().team == "AT") {
 				GameObject tmp = Instantiate (atRag,transform.position,transform.rotation);
 				tmp.GetComponent<NetworkObject>().Spawn();
@@ -175,7 +180,7 @@ public class PlayerStatus : NetworkBehaviour
         {
             if (molotovTimeElapsed >= molotovTime)
             {
-                TakeDamage(5);
+                //TakeDamage(5);
 
                 molotovTimeElapsed = 0.0f;
             }

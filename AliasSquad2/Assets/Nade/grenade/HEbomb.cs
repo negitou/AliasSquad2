@@ -61,7 +61,7 @@ public class HEbomb : NetworkBehaviour {
 
 						if (Bdamage > 0) {											//ダメージが0以上の時
 							PlayerStatus obj = ply.GetComponent<PlayerStatus> ();
-							obj.TakeDamage(Bdamage);     
+							//obj.TakeDamage(Bdamage);     
 						}
                     }
                 }
